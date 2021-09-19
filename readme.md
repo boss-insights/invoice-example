@@ -12,6 +12,8 @@ Displays an example workflow showing how to connect to accounting software, gath
 4. Syncronizes invoice data and presents this on screen
 
 
+## To install
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/boss-insights/invoice-example)
 
 
