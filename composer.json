@@ -21,6 +21,8 @@
             "@putenv ORG_URL=https://bank.myintranet.app:4443",
             "@putenv API_KEY=admin",
             "@putenv API_SECRET=secret",
+            "@putenv ADMIN_URL=https://admin.myintranet.app:5443",
+            "@putenv ACCOUNT_KEY=",
             "php -d variables_order=EGPCS -S 127.0.0.1:8080 -t web"
         ]
     },

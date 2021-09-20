@@ -7,7 +7,8 @@ $commonData = array(
     'ORG_URL' => getenv('ORG_URL'), 
     'API_KEY' => getenv('API_KEY'), 
     'API_SECRET' => getenv('API_SECRET'), 
-    'SITE_URL' =>  ($isHTTPS?'https://':'http://').$_SERVER['HTTP_HOST']
+    'SITE_URL' =>  ($isHTTPS?'https://':'http://').$_SERVER['HTTP_HOST'],
+    'ADMIN_URL' => getenv('ADMIN_URL')
 );
 
 foreach($commonData as $commonKey => $commonValue){
