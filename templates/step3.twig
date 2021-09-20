@@ -14,7 +14,7 @@
             <div class="col-md-5 col-lg-4 order-md-last">
               <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-primary">Selected Invoices</span>
-                <span class="badge bg-primary rounded-pill">0</span>
+                <span id="invoiceCounter" class="badge bg-primary rounded-pill">0</span>
               </h4>
               <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -22,14 +22,14 @@
                     <h6 class="my-0">Selected Invoices</h6>
                     <small class="text-muted">Available for factoring</small>
                   </div>
-                  <span class="text-muted">$0</span>
+                  <span id="selectedInvoicesAmount" class="text-muted">$0</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                   <div>
                     <h6 class="my-0">80% Fundable</h6>
                     <small class="text-muted">Revolving Credit</small>
                   </div>
-                  <span class="text-muted">$0</span>
+                  <span id="fundableInvoicesAmount" class="text-muted">$0</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
                   <div class="text-success">
@@ -38,7 +38,7 @@
                   </div>
                   <span class="text-success">+$25</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between">
+                <li id="availableTotalAmount" class="list-group-item d-flex justify-content-between">
                   <span>Available TODAY (USD)</span>
                   <strong>$25</strong>
                 </li>
@@ -52,27 +52,36 @@
                 
     
 
-      <ul class="list-group mb-3">
+      <ul id="invoiceList" class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between lh-sm" data-invoice-number="29829" data-invoice-company="Smith & Jones Ltd" data-invoice-amount="2722.66" data-invoice-days="92">
-                  <div>
-                    <h6 class="my-0">Invoice #1</h6>
-                    <small class="text-muted">xxx</small>
+                  <div class="selectInvoice form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" value="" name="invoice1" aria-label="Select invoice">
                   </div>
-                  <span class="text-muted">$0</span>
+                    <div class="invoiceInfo flex-grow-1">
+                    <h6 class="my-0">Invoice #</h6>
+                    <small class="invoiceCompany text-muted">xxx</small>
+                  </div>
+                  <span class="invoiceAmount text-muted">$0</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between lh-sm">
-                  <div>
-                    <h6 class="my-0">Invoice #2</h6>
-                    <small class="text-muted">xxx</small>
+                <li class="list-group-item d-flex justify-content-between lh-sm" data-invoice-number="29830" data-invoice-company="Umbrella Corporation" data-invoice-amount="5175.80" data-invoice-days="35">
+                    <div class="selectInvoice form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" name="invoice2" aria-label="Select invoice">
+                    </div>
+                  <div class="invoiceInfo flex-grow-1">
+                    <h6 class="my-0">Invoice #</h6>
+                    <small class="invoiceCompany text-muted">xxx</small>
                   </div>
-                  <span class="text-muted">$0</span>
+                  <span class="invoiceAmount text-muted">$0</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between bg-light">
-                  <div class="text-success">
-                    <h6 class="my-0">Invoice #3</h6>
-                    <small class="text-muted">xxx</small>
+                <li class="list-group-item d-flex justify-content-between lh-sm" data-invoice-number="29831" data-invoice-company="Granite Software" data-invoice-amount="6870.00" data-invoice-days="54">
+                    <div class="selectInvoice form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" name="invoice3" aria-label="Select invoice">
+                    </div>
+                  <div class="invoiceInfo flex-grow-1">
+                    <h6 class="my-0">Invoice #</h6>
+                    <small class="invoiceCompany text-muted">xxx</small>
                   </div>
-                  <span class="text-success">$0</span>
+                  <span class="invoiceAmount text-muted">$0</span>
                 </li>
 
               </ul>
@@ -80,8 +89,8 @@
 
       
                 <hr class="my-4">
-      
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+                  <input type="hidden" id="nextStep" name="nextStep" value="1">
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Claim your funding</button>
               </form>
             </div>
           </div>
@@ -90,6 +99,80 @@
 
 {% block script %}
 <script type="application/javascript">
+$(document).ready(function () {
 
+    // Uncheck all checkboxes on page load
+    $('.selectInvoice input').each( function () {
+       $(this).prop('checked', false);
+    });
+
+    // Add values to invoice table
+    $('#invoiceList li').each(function () {
+        var invoiceInfo = {
+            invoiceNumber:$(this).attr('data-invoice-number'),
+            invoiceCompany: $(this).attr('data-invoice-company'),
+            invoiceAmount: $(this).attr('data-invoice-amount'),
+            InvoiceDays: $(this).attr('data-invoice-days'),
+        }
+        //Invoice number
+        $(this).find('h6').text('Invoice #' + invoiceInfo.invoiceNumber);
+        //Company name
+        $(this).find('.invoiceCompany').text(invoiceInfo.invoiceCompany);
+        //Amount
+        $(this).find('.invoiceAmount').text('$' + invoiceInfo.invoiceAmount);
+    });
+
+    // Update selected invoice counter
+    $('.selectInvoice input').on('change', function () {
+        // Get text from fields and use them to do the arithmetics
+        var totals = {
+            selectedInvoicesAmount: parseFloat($('#selectedInvoicesAmount').text().replace('$','')),
+            fundableInvoicesAmount: parseFloat($('#fundableInvoicesAmount').text().replace('$','')),
+            availableTotalAmount: parseFloat($('#availableTotalAmount strong').text().replace('$','')),
+            counter: parseInt($('#invoiceCounter').text())
+        }
+
+        // Invoice amount
+        var selectedListItem = $(this).closest('li');
+        var invoiceAmount = parseFloat(selectedListItem.attr('data-invoice-amount'));
+        var updateCounter = 1;
+
+
+        // If unchecking, set negative value
+        if(!$(this).prop('checked')) {
+            invoiceAmount = -invoiceAmount;
+            updateCounter = -updateCounter;
+            selectedListItem.removeClass('invoiceSelected');
+        } else {
+            selectedListItem.addClass('invoiceSelected');
+        }
+
+        //Update values from totals
+        totals.selectedInvoicesAmount += invoiceAmount;
+        totals.fundableInvoicesAmount += (invoiceAmount * 0.80);
+        totals.availableTotalAmount += (invoiceAmount * 0.80);
+        totals.counter += updateCounter;
+
+        // Add calculated values to elements
+        $('#selectedInvoicesAmount').text('$' + totals.selectedInvoicesAmount.toFixed(2));
+        $('#fundableInvoicesAmount').text('$' + totals.fundableInvoicesAmount.toFixed(2));
+        $('#availableTotalAmount strong').text('$' + totals.availableTotalAmount.toFixed(2));
+        $('#invoiceCounter').text(totals.counter);
+    });
+
+    $('ul#invoiceList li').on('click', function (e) {
+        // Avoid triggering change on input twice when clicking on checkbox
+        if(!e.target.matches('input.form-check-input')) {
+            //If is checked, uncheck (and check otherwise)
+            if ($(this).find('.selectInvoice input').prop('checked')) {
+                $(this).find('.selectInvoice input').prop('checked', false).trigger('change');
+            } else {
+                $(this).find('.selectInvoice input').prop('checked', true).trigger('change');
+            }
+        }
+
+    });
+
+})
 </script>
 {% endblock %}
