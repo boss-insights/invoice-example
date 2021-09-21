@@ -14,7 +14,7 @@ $commonData = array(
     'SITE_URL' =>  ($isHTTPS?'https://':'http://').$_SERVER['HTTP_HOST'],
     'ADMIN_URL' => getenv('ADMIN_URL'),
   	'ACCOUNT_KEY' => getenv('ACCOUNT_KEY'),
-  	'BRAND_ACCENT_COLOR' => (getenv('BRAND_ACCENT_COLOR') === false) ? '3199DB' : getenv('BRAND_ACCENT_COLOR')
+  	'BRAND_ACCENT_COLOR' => str_replace('#','',(getenv('BRAND_ACCENT_COLOR') === false) ? '3199DB' : getenv('BRAND_ACCENT_COLOR'))
 );
 
 foreach($commonData as $commonKey => $commonValue){
