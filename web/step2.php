@@ -3,10 +3,17 @@
  * @global array $commonData
  * @global Environment $twig
  */
+
 use Twig\Environment;
 
 require __DIR__ . '/../common.php';
 
-// get domain and api key and secret from session
+if (!isset($_SESSION['account_key'])) {
+  header('Location: step1.php');
+}
 
-echo $twig->render('step2.twig', array_merge($commonData, []));
+// get domain and api key and secret from session
+$basicAuth = base64_encode('admin:' . $_SESSION['password']); // 'YWRtaW46c2VjcmV0'
+$accountDomain = $_SESSION['account_domain'];
+
+echo $twig->render('step2.twig', array_merge($commonData, ['AUTH_BASIC' => $basicAuth, 'ACCOUNT_DOMAIN' => $accountDomain]));

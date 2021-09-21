@@ -20,12 +20,12 @@
       var widget = new DockLink({
         container: document.getElementsByClassName('DockLink_AppList')[0],
         name: "{{ ORG_NAME }}",
-        brand: {accent:'#FF0000'},
-        domain: "borrow.myintranet.app:4443",
+        brand: {accent:'#{{ BRAND_ACCENT_COLOR }}'},
+        domain: "{{ ACCOUNT_DOMAIN }}",
         cancel: "{{ SITE_URL }}/cancel.html",
         redirect: "{{ SITE_URL }}/step3.php",
-        platforms: ['accounting','commerce', 'banking'],
-        auth: {basic: 'YWRtaW46c2VjcmV0'}
+        platforms: ['accounting','commerce'],
+        auth: {basic: '{{ AUTH_BASIC }}'}
       });
 
       widget.render();
