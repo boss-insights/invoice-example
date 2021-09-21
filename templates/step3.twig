@@ -61,10 +61,13 @@
                                        aria-label="Select invoice">
                             </div>
                             <div class="invoiceInfo flex-grow-1">
-                                <h6 class="my-0">Invoice #</h6>
+                                <div class="d-flex flex-row align-items-center">
+                                    <h6 class="my-0">Invoice #</h6>
+                                    <small class="invoiceDays ms-2 badge badge rounded-pill"></small>
+                                </div>
                                 <small class="invoiceCompany text-muted">xxx</small>
                             </div>
-                            <span class="invoiceAmount text-muted">$0</span>
+                                <span class="invoiceAmount text-muted">$0</span>
                         </li>
                     {% endfor %}
                 </ul>
@@ -94,23 +97,31 @@
                     invoiceNumber: $(this).attr('data-invoice-number'),
                     invoiceCompany: $(this).attr('data-invoice-company'),
                     invoiceAmount: $(this).attr('data-invoice-amount'),
-                    InvoiceDays: $(this).attr('data-invoice-days'),
+                    invoiceDays: $(this).attr('data-invoice-days'),
                 }
+
+                // Assign background color according to number of days due
+                var daysInteger = parseInt(invoiceInfo.invoiceDays);
+                var invoiceDaysClass = daysInteger > 90 ? 'bg-red' : daysInteger > 60 ? 'bg-orange' : 'bg-green';
+
                 //Invoice number
                 $(this).find('h6').text('Invoice #' + invoiceInfo.invoiceNumber);
                 //Company name
                 $(this).find('.invoiceCompany').text(invoiceInfo.invoiceCompany);
+                //Days due
+                $(this).find('.invoiceDays').text(invoiceInfo.invoiceDays + ' days');
+                $(this).find('.invoiceDays').addClass(invoiceDaysClass);
                 //Amount
-                $(this).find('.invoiceAmount').text('$' + invoiceInfo.invoiceAmount);
+                $(this).find('.invoiceAmount').text('$' + thousandsAndDecimals(invoiceInfo.invoiceAmount));
             });
 
             // Update selected invoice counter
             $('.selectInvoice input').on('change', function () {
                 // Get text from fields and use them to do the arithmetics
                 var totals = {
-                    selectedInvoicesAmount: parseFloat($('#selectedInvoicesAmount').text().replace('$', '')),
-                    fundableInvoicesAmount: parseFloat($('#fundableInvoicesAmount').text().replace('$', '')),
-                    availableTotalAmount: parseFloat($('#availableTotalAmount strong').text().replace('$', '')),
+                    selectedInvoicesAmount: convertToFloat($('#selectedInvoicesAmount').text()),
+                    fundableInvoicesAmount: convertToFloat($('#fundableInvoicesAmount').text()),
+                    availableTotalAmount: convertToFloat($('#availableTotalAmount strong').text()),
                     counter: parseInt($('#invoiceCounter').text())
                 }
 
@@ -118,8 +129,6 @@
                 var selectedListItem = $(this).closest('li');
                 var invoiceAmount = parseFloat(selectedListItem.attr('data-invoice-amount'));
                 var updateCounter = 1;
-
-
                 // If unchecking, set negative value
                 if (!$(this).prop('checked')) {
                     invoiceAmount = -invoiceAmount;
@@ -136,9 +145,9 @@
                 totals.counter += updateCounter;
 
                 // Add calculated values to elements
-                $('#selectedInvoicesAmount').text('$' + totals.selectedInvoicesAmount.toFixed(2));
-                $('#fundableInvoicesAmount').text('$' + totals.fundableInvoicesAmount.toFixed(2));
-                $('#availableTotalAmount strong').text('$' + totals.availableTotalAmount.toFixed(2));
+                $('#selectedInvoicesAmount').text('$' + thousandsAndDecimals(totals.selectedInvoicesAmount));
+                $('#fundableInvoicesAmount').text('$' + thousandsAndDecimals(Math.abs(totals.fundableInvoicesAmount)));
+                $('#availableTotalAmount strong').text('$' + thousandsAndDecimals(totals.availableTotalAmount));
                 $('#invoiceCounter').text(totals.counter);
             });
 
@@ -154,6 +163,15 @@
                 }
 
             });
+
+            //Add thousands separator and decimals to numbers
+            function thousandsAndDecimals(number) {
+                return  parseFloat(number).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+            //Convert strings to numbers by removing separators ("," and "." ) and dollar sign
+            function convertToFloat(string) {
+                return parseFloat(string.replace('$', '').replace(',', ''));
+            }
 
         })
     </script>

@@ -13,6 +13,10 @@
     border-left: 0.3em solid #0d6efd;
 }
 
+.invoiceDays {
+    color: #ffffff;
+}
+
 .checkmark {
     color: #198754;
     font-size: 4.5rem;
@@ -26,4 +30,16 @@
 
 .text-success {
     font-weight: 700;
+}
+
+.bg-green {
+    background-color:#28a745;
+}
+
+.bg-orange {
+    background-color:#fd7e14;
+}
+
+.bg-red {
+    background-color:#dc3545;
 }
