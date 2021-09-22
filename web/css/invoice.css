@@ -28,6 +28,10 @@
     background-color: #ECECEC;
 }
 
+#selectAllWrapper {
+    margin: 1rem 0;
+}
+
 .text-success {
     font-weight: 700;
 }
