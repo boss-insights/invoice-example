@@ -1,0 +1,33 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+<div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" src="/img/boss256.png" alt="" width="64" height="64">
+<h2>Invoice Example - Step 2</h2>
+            <p class="lead">Using accounting app data to show a list of invoices for factoring</p>
+          </div>
+
+          <div class="DockLink_AppList"></div>
+      
+          
+
+{% endblock %}
+
+{% block script %}
+<script src="{{ ORG_URL }}/dock/link/2021-01-15/link.js" type="text/javascript"></script>
+    <script>
+      var widget = new DockLink({
+        container: document.getElementsByClassName('DockLink_AppList')[0],
+        name: "{{ ORG_NAME }}",
+        brand: {accent:'#{{ BRAND_ACCENT_COLOR }}'},
+        domain: "{{ ACCOUNT_DOMAIN }}",
+        cancel: "{{ SITE_URL }}/step1.php",
+        redirect: "{{ SITE_URL }}/step3.php",
+        platforms: ['accounting','commerce'],
+        auth: {basic: '{{ AUTH_BASIC }}'}
+      });
+
+      widget.render();
+    </script>
+{% endblock %}

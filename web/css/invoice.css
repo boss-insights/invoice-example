@@ -1,0 +1,49 @@
+.selectInvoice {
+    display: inline-flex;
+    align-items: center;
+}
+
+#invoiceList li {
+    cursor: pointer;
+    transition: border-right, border-left, linear 100ms;
+}
+
+.invoiceSelected {
+    border-right: 0.3em solid #0d6efd;
+    border-left: 0.3em solid #0d6efd;
+}
+
+.invoiceDays {
+    color: #ffffff;
+}
+
+.checkmark {
+    color: #198754;
+    font-size: 4.5rem;
+    font-weight: bold;
+    border: 3px solid #198754;
+    border-radius: 50%;
+    width: 125px;
+    height: 125px;
+    background-color: #ECECEC;
+}
+
+#selectAllWrapper {
+    margin: 1rem 0;
+}
+
+.text-success {
+    font-weight: 700;
+}
+
+.bg-green {
+    background-color:#28a745;
+}
+
+.bg-orange {
+    background-color:#fd7e14;
+}
+
+.bg-red {
+    background-color:#dc3545;
+}

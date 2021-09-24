@@ -1,0 +1,200 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/img/boss256.png" alt="" width="64" height="64">
+        <h2>Invoice Example - Step 3</h2>
+        <p class="lead">Using accounting app data to show a list of invoices for factoring</p>
+    </div>
+    <hr>
+
+    <div class="row g-5">
+        <div class="col-md-5 col-lg-4 order-md-last">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-primary">Selected Invoices</span>
+                <span id="invoiceCounter" class="badge bg-primary rounded-pill">0</span>
+            </h4>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Selected Invoices</h6>
+                        <small class="text-muted">Available for factoring</small>
+                    </div>
+                    <span id="selectedInvoicesAmount" class="text-muted">$0</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">80% Fundable</h6>
+                        <small class="text-muted">Revolving Credit</small>
+                    </div>
+                    <span id="fundableInvoicesAmount" class="text-muted">$0</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                    <div class="text-success">
+                        <h6 class="my-0">Promo code</h6>
+                        <small>CASHNOW</small>
+                    </div>
+                    <span class="text-success">+$25</span>
+                </li>
+                <li id="availableTotalAmount" class="list-group-item d-flex justify-content-between">
+                    <span>Available TODAY (USD)</span>
+                    <strong>$25</strong>
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">Invoices from your records:</h4>
+            <div id="selectAllWrapper" class="d-flex justify-content-end">
+                <input class="btn-check" type="checkbox" value="" id="selectAll">
+                <label class="btn btn-outline-primary" for="selectAll">
+                    Select All Invoices
+                </label>
+            </div>
+            <form class="needs-validation" action="step3.php" method="post" accept-charset="UTF-8"
+                  enctype="application/x-www-form-urlencoded">
+
+
+                <ul id="invoiceList" class="list-group mb-3">
+                    {% for invoice in invoices %}
+                        <li class="list-group-item d-flex justify-content-between lh-sm"
+                            data-invoice-number="{{ invoice.number }}" data-invoice-company="{{ invoice.company }}"
+                            data-invoice-amount="{{ invoice.amount }}" data-invoice-days="{{ invoice.days }}"
+                            data-invoice-due="{{ invoice.due }}">
+                            <div class="selectInvoice form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" name="invoice1"
+                                       aria-label="Select invoice">
+                            </div>
+                            <div class="invoiceInfo flex-grow-1">
+                                <div class="d-flex flex-row align-items-center">
+                                    <h6 class="my-0">Invoice #</h6>
+                                    <small class="invoiceDays ms-2 badge badge rounded-pill"></small>
+                                </div>
+                                <small class="invoiceCompany text-muted">xxx</small>
+                            </div>
+                                <span class="invoiceAmount text-muted">$0</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+
+                <hr class="my-4">
+                <input type="hidden" id="nextStep" name="nextStep" value="1">
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Claim your funding</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script type="application/javascript">
+        $(document).ready(function () {
+
+            // Uncheck all checkboxes on page load
+            $('.selectInvoice input').each(function () {
+                $(this).prop('checked', false);
+            });
+
+            // Add values to invoice table on page load
+            $('#invoiceList li').each(function () {
+                var invoiceInfo = {
+                    invoiceNumber: $(this).attr('data-invoice-number'),
+                    invoiceCompany: $(this).attr('data-invoice-company'),
+                    invoiceAmount: $(this).attr('data-invoice-amount'),
+                    invoiceDays: $(this).attr('data-invoice-days'),
+                }
+
+                // Assign background color according to number of days due
+                var daysInteger = parseInt(invoiceInfo.invoiceDays);
+                var invoiceDaysClass = daysInteger > 90 ? 'bg-red' : daysInteger > 60 ? 'bg-orange' : 'bg-green';
+
+                //Invoice number
+                $(this).find('h6').text('Invoice #' + invoiceInfo.invoiceNumber);
+                //Company name
+                $(this).find('.invoiceCompany').text(invoiceInfo.invoiceCompany);
+                //Days due
+                $(this).find('.invoiceDays').text(invoiceInfo.invoiceDays + ' days');
+                $(this).find('.invoiceDays').addClass(invoiceDaysClass);
+                //Amount
+                $(this).find('.invoiceAmount').text('$' + thousandsAndDecimals(invoiceInfo.invoiceAmount));
+            });
+
+            // Update selected invoice counter on change
+            $('.selectInvoice input').on('change', function () {
+                // Get text from fields and use them to do the arithmetics
+                var totals = {
+                    selectedInvoicesAmount: convertToFloat($('#selectedInvoicesAmount').text()),
+                    fundableInvoicesAmount: convertToFloat($('#fundableInvoicesAmount').text()),
+                    availableTotalAmount: convertToFloat($('#availableTotalAmount strong').text()),
+                    counter: parseInt($('#invoiceCounter').text())
+                }
+
+                // Invoice amount
+                var selectedListItem = $(this).closest('li');
+                var invoiceAmount = parseFloat(selectedListItem.attr('data-invoice-amount'));
+                var updateCounter = 1;
+                // If unchecking, set negative value
+                if (!$(this).prop('checked')) {
+                    invoiceAmount = -invoiceAmount;
+                    updateCounter = -updateCounter;
+                    selectedListItem.removeClass('invoiceSelected');
+                } else {
+                    selectedListItem.addClass('invoiceSelected');
+                }
+
+                //Update values from totals
+                totals.selectedInvoicesAmount += invoiceAmount;
+                totals.fundableInvoicesAmount += (invoiceAmount * 0.80);
+                totals.availableTotalAmount += (invoiceAmount * 0.80);
+                totals.counter += updateCounter;
+
+                // Add calculated values to elements
+                $('#selectedInvoicesAmount').text('$' + thousandsAndDecimals(totals.selectedInvoicesAmount));
+                $('#fundableInvoicesAmount').text('$' + thousandsAndDecimals(Math.abs(totals.fundableInvoicesAmount)));
+                $('#availableTotalAmount strong').text('$' + thousandsAndDecimals(totals.availableTotalAmount));
+                $('#invoiceCounter').text(totals.counter);
+            });
+
+            $('ul#invoiceList li').on('click', function (e) {
+                // Avoid triggering change on input twice when clicking on checkbox
+                if (!e.target.matches('input.form-check-input')) {
+                    //If is checked, uncheck (and check otherwise)
+                    if ($(this).find('.selectInvoice input').prop('checked')) {
+                        $(this).find('.selectInvoice input').prop('checked', false).trigger('change');
+                    } else {
+                        $(this).find('.selectInvoice input').prop('checked', true).trigger('change');
+                    }
+                }
+            });
+
+            $('#selectAllWrapper input').on('change', function () {
+                if($(this).prop('checked')) {
+                    $(this).siblings('label').text('Deselect All Invoices');
+                    changeElementsProperty('.selectInvoice input', 'checked', false, 'change');
+                } else {
+                    $(this).siblings('label').text('Select All Invoices');
+                    changeElementsProperty('.selectInvoice input', 'checked', true, 'change');
+                }
+            });
+            //Change the property value of multiple elements and trigger an event
+            function changeElementsProperty(selector, property, boolean, event) {
+                $(selector).each(function () {
+                    if($(this).prop(property) === boolean) {
+                        $(this).prop(property, !(boolean)).triggerHandler(event);
+                    }
+                });
+            }
+            //Add thousands separator and decimals to numbers
+            function thousandsAndDecimals(number) {
+                return  parseFloat(number).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+            //Convert strings to numbers by removing separators ("," and "." ) and dollar sign
+            function convertToFloat(string) {
+                return parseFloat(string.replace('$', '').replace(',', ''));
+            }
+
+        })
+    </script>
+{% endblock %}

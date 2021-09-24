@@ -1,0 +1,45 @@
+{
+    "name": "Boss Insights : Invoice Factoring Example",
+    "description": "Using accounting app data to show a list of invoices for factoring",
+    "repository": "https://github.com/boss-insights/invoice-example",
+    "logo": "https://static.bossinsights.com/images/bosslogo-blue-cuponly-whitespace-highrez.png",
+    "keywords": ["api", "accounting", "example"],
+    "website": "https://bossinsights.com/",
+    "env": {
+        "ORG_NAME": {
+            "description": "",
+            "value": "",
+            "required": true
+        },
+        "ORG_URL": {
+            "description": "",
+            "value": "",
+            "required": true
+        },
+        "API_KEY": {
+            "description": "",
+            "value": "",
+            "required": true
+        },
+        "API_SECRET": {
+            "description": "",
+            "value": "",
+            "required": true
+        },
+        "ADMIN_URL": {
+            "description": "",
+            "value": "",
+            "required": true
+        },
+        "ACCOUNT_KEY": {
+            "description": "",
+            "value": "",
+            "required": true
+        },
+        "BRAND_ACCENT_COLOR": {
+            "description": "",
+            "value": "",
+            "required": false
+        }
+    }
+}

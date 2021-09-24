@@ -1,0 +1,35 @@
+{
+    "name":"bossinsights/invoice-example",
+    "description": "Using accounting app data to show a list of invoices for factoring",
+    "homepage": "https://bossinsights.com",
+    "readme": "readme.md",
+    "license": "MIT",
+    "require": {
+        "php": ">=8",
+        "ext-json": "*",
+        "ext-session": "*",
+        "ext-openssl": "*",
+        "twig/twig": "^3.1",
+        "twig/intl-extra": "^3.1",
+        "guzzlehttp/guzzle": "^6.5"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    },
+    "scripts": {
+        "start": [
+            "@putenv ORG_NAME=Test Bank",
+            "@putenv ORG_URL=https://bank.myintranet.app:4443",
+            "@putenv API_KEY=admin",
+            "@putenv API_SECRET=secret",
+            "@putenv ADMIN_URL=https://admin.myintranet.app:5443",
+            "@putenv ACCOUNT_KEY=5f66c0b15206d1.36412804",
+            "@putenv BRAND_ACCENT_COLOR=FF0000",
+            "@putenv SELF_SIGNED_CERT=1",
+            "php -d variables_order=EGPCS -S 127.0.0.1:8080 -t web"
+        ]
+    },
+    "scripts-descriptions": {
+        "start": "start a local development server"
+    }
+}
