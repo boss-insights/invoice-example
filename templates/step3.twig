@@ -46,6 +46,12 @@
         </div>
         <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Invoices from your records:</h4>
+            <div id="selectAllWrapper" class="d-flex justify-content-end">
+                <input class="btn-check" type="checkbox" value="" id="selectAll">
+                <label class="btn btn-outline-primary" for="selectAll">
+                    Select All Invoices
+                </label>
+            </div>
             <form class="needs-validation" action="step3.php" method="post" accept-charset="UTF-8"
                   enctype="application/x-www-form-urlencoded">
 
@@ -91,7 +97,7 @@
                 $(this).prop('checked', false);
             });
 
-            // Add values to invoice table
+            // Add values to invoice table on page load
             $('#invoiceList li').each(function () {
                 var invoiceInfo = {
                     invoiceNumber: $(this).attr('data-invoice-number'),
@@ -115,7 +121,7 @@
                 $(this).find('.invoiceAmount').text('$' + thousandsAndDecimals(invoiceInfo.invoiceAmount));
             });
 
-            // Update selected invoice counter
+            // Update selected invoice counter on change
             $('.selectInvoice input').on('change', function () {
                 // Get text from fields and use them to do the arithmetics
                 var totals = {
@@ -161,9 +167,25 @@
                         $(this).find('.selectInvoice input').prop('checked', true).trigger('change');
                     }
                 }
-
             });
 
+            $('#selectAllWrapper input').on('change', function () {
+                if($(this).prop('checked')) {
+                    $(this).siblings('label').text('Deselect All Invoices');
+                    changeElementsProperty('.selectInvoice input', 'checked', false, 'change');
+                } else {
+                    $(this).siblings('label').text('Select All Invoices');
+                    changeElementsProperty('.selectInvoice input', 'checked', true, 'change');
+                }
+            });
+            //Change the property value of multiple elements and trigger an event
+            function changeElementsProperty(selector, property, boolean, event) {
+                $(selector).each(function () {
+                    if($(this).prop(property) === boolean) {
+                        $(this).prop(property, !(boolean)).triggerHandler(event);
+                    }
+                });
+            }
             //Add thousands separator and decimals to numbers
             function thousandsAndDecimals(number) {
                 return  parseFloat(number).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
