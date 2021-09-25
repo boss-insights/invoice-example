@@ -87,8 +87,8 @@
                         <label for="country" class="form-label">Country</label>
                         <select class="form-select" id="country">
                             <option value="">Choose...</option>
-                            <option>United States</option>
-                            <option>Canada</option>
+                            <option value="usa">United States</option>
+                            <option value="can">Canada</option>
                         </select>
                         <div class="invalid-feedback">
                             Please select a valid country.
@@ -97,74 +97,71 @@
 
                     <div class="col-md-4">
                         <label for="state" class="form-label">State</label>
-                        <select class="form-select" id="state">
-                            <option value="">Choose...</option>
-                            <optgroup label="United States">
+                        <select disabled class="form-select" id="state">
+                            <option class="">Choose...</option>
+                            <option class="usa">Alabama</option>
+                            <option class="usa">Alaska</option>
+                            <option class="usa">Arizona</option>
+                            <option class="usa">Arkansas</option>
+                            <option class="usa">California</option>
+                            <option class="usa">Colorado</option>
+                            <option class="usa">Connecticut</option>
+                            <option class="usa">Delaware</option>
+                            <option class="usa">District Of Columbia</option>
+                            <option class="usa">Florida</option>
+                            <option class="usa">Georgia</option>
+                            <option class="usa">Hawaii</option>
+                            <option class="usa">Idaho</option>
+                            <option class="usa">Illinois</option>
+                            <option class="usa">Indiana</option>
+                            <option class="usa">Iowa</option>
+                            <option class="usa">Kansas</option>
+                            <option class="usa">Kentucky</option>
+                            <option class="usa">Louisiana</option>
+                            <option class="usa">Maine</option>
+                            <option class="usa">Maryland</option>
+                            <option class="usa">Massachusetts</option>
+                            <option class="usa">Michigan</option>
+                            <option class="usa">Minnesota</option>
+                            <option class="usa">Mississippi</option>
+                            <option class="usa">Missouri</option>
+                            <option class="usa">Montana</option>
+                            <option class="usa">Nebraska</option>
+                            <option class="usa">Nevada</option>
+                            <option class="usa">New Hampshire</option>
+                            <option class="usa">New Jersey</option>
+                            <option class="usa">New Mexico</option>
+                            <option class="usa">New York</option>
+                            <option class="usa">North Carolina</option>
+                            <option class="usa">North Dakota</option>
+                            <option class="usa">Ohio</option>
+                            <option class="usa">Oklahoma</option>
+                            <option class="usa">Oregon</option>
+                            <option class="usa">Pennsylvania</option>
+                            <option class="usa">Rhode Island</option>
+                            <option class="usa">South Carolina</option>
+                            <option class="usa">South Dakota</option>
+                            <option class="usa">Tennessee</option>
+                            <option class="usa">Texas</option>
+                            <option class="usa">Utah</option>
+                            <option class="usa">Vermont</option>
+                            <option class="usa">Virginia</option>
+                            <option class="usa">Washington</option>
+                            <option class="usa">West Virginia</option>
+                            <option class="usa">Wisconsin</option>
+                            <option class="usa">Wyoming</option>
 
-                            <option>Alabama</option>
-                            <option>Alaska</option>
-                            <option>Arizona</option>
-                            <option>Arkansas</option>
-                            <option>California</option>
-                            <option>Colorado</option>
-                            <option>Connecticut</option>
-                            <option>Delaware</option>
-                            <option>District Of Columbia</option>
-                            <option>Florida</option>
-                            <option>Georgia</option>
-                            <option>Hawaii</option>
-                            <option>Idaho</option>
-                            <option>Illinois</option>
-                            <option>Indiana</option>
-                            <option>Iowa</option>
-                            <option>Kansas</option>
-                            <option>Kentucky</option>
-                            <option>Louisiana</option>
-                            <option>Maine</option>
-                            <option>Maryland</option>
-                            <option>Massachusetts</option>
-                            <option>Michigan</option>
-                            <option>Minnesota</option>
-                            <option>Mississippi</option>
-                            <option>Missouri</option>
-                            <option>Montana</option>
-                            <option>Nebraska</option>
-                            <option>Nevada</option>
-                            <option>New Hampshire</option>
-                            <option>New Jersey</option>
-                            <option>New Mexico</option>
-                            <option>New York</option>
-                            <option>North Carolina</option>
-                            <option>North Dakota</option>
-                            <option>Ohio</option>
-                            <option>Oklahoma</option>
-                            <option>Oregon</option>
-                            <option>Pennsylvania</option>
-                            <option>Rhode Island</option>
-                            <option>South Carolina</option>
-                            <option>South Dakota</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Utah</option>
-                            <option>Vermont</option>
-                            <option>Virginia</option>
-                            <option>Washington</option>
-                            <option>West Virginia</option>
-                            <option>Wisconsin</option>
-                            <option>Wyoming</option>
-                            </optgroup>
-                            <optgroup label="Canada">
-                            <option>Alberta</option>
-                            <option>British Columbia</option>
-                            <option>Manitoba</option>
-                            <option>New Brunswick</option>
-                            <option>Newfoundland and labrador</option>
-                            <option>Nova Scotia</option>
-                            <option>Ontario</option>
-                            <option>Prince Edward Island</option>
-                            <option>Quebec</option>
-                            <option>Saskatchewan</option>
-                            </optgroup>
+                            <option class="can">Alberta</option>
+                            <option class="can">British Columbia</option>
+                            <option class="can">Manitoba</option>
+                            <option class="can">New Brunswick</option>
+                            <option class="can">Newfoundland and labrador</option>
+                            <option class="can">Nova Scotia</option>
+                            <option class="can">Ontario</option>
+                            <option class="can">Prince Edward Island</option>
+                            <option class="can">Quebec</option>
+                            <option class="can">Saskatchewan</option>
+
                         </select>
                         <div class="invalid-feedback">
                             Please provide a valid state.
@@ -209,6 +206,29 @@
             $('#submitForm').prop('disabled', true);
             $('.submissionText, .d-none').removeClass('d-none');
             $('.defaultText').addClass('d-none');
+        });
+        //Filter state dropdown by country
+        $('#country').on('change', function () {
+            // Clear dropdown;
+            $('#state option:selected').prop('selected', false);
+            // Select country
+            var country = $(this).find('option:selected').val();
+            var stateOrProvince = country === 'can' ? 'Province' : 'State   ';
+            // Set label for state/province dropdown
+            $('label[for="state"]').text(stateOrProvince);
+            // If no country is selected, set state dropdown do disabled - else, hide other country's states/provinces
+            if(country === "") {
+                $('#state').prop('disabled', true);
+            } else {
+                $('#state').prop('disabled', false);
+                $('#state option').each(function() {
+                    if($(this).attr('class') !== country) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+                });
+            }
         });
     })
 </script>
