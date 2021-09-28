@@ -5,7 +5,7 @@ use Twig\Loader\FilesystemLoader;
 
 require __DIR__ . '/vendor/autoload.php';
 
-$isHTTPS = (!empty($_SERVER['HTTPS'] ?? '') && $_SERVER['HTTPS'] !== 'off');
+$isHTTPS = (!empty($_SERVER['HTTPS'] ?? '') && $_SERVER['HTTPS'] !== 'off') || ($_SERVER['HTTP_X_FORWARDED_PROTO']??null ==='https');
 $commonData = array(
 	'ORG_NAME'           => getenv('ORG_NAME'),
 	'ORG_URL'            => getenv('ORG_URL'),
