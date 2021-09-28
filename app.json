@@ -41,8 +41,5 @@
             "value": "",
             "required": false
         }
-    },
-    "scripts": {
-        "postdeploy": "php postdeploy.php"
     }
 }

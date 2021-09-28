@@ -27,17 +27,6 @@
             "@putenv BRAND_ACCENT_COLOR=FF0000",
             "@putenv SELF_SIGNED_CERT=1",
             "php -d max_execution_time=600 -d variables_order=EGPCS -S 127.0.0.1:8080 -t web"
-        ],
-        "urllist": [
-            "@putenv ORG_NAME=Test Bank",
-            "@putenv ORG_URL=https://lendo.myintranet.app:4443",
-            "@putenv API_KEY=admin",
-            "@putenv API_SECRET=secret",
-            "@putenv ADMIN_URL=https://admin.myintranet.app:5443",
-            "@putenv ACCOUNT_KEY=5e89ff76147742.42612473",
-            "@putenv SELF_SIGNED_CERT=1",
-            "@putenv DYNO=heroku-test-app02",
-            "php postdeploy.php"
         ]
     },
     "scripts-descriptions": {
