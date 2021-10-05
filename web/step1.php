@@ -42,7 +42,7 @@ if ($_POST) {
 
   // validate input, send an API request to create account, store result in session, redirect to step 2
   $email = filter_var(strtolower(trim($_POST['email'])), FILTER_VALIDATE_EMAIL);
-  $legalName = filter_var(trim($_POST['legalName']), FILTER_SANITIZE_STRING);
+  $legalName = filter_var(preg_replace( '/[^a-zA-Z0-9 ]/', '',trim($_POST['legalName']), FILTER_SANITIZE_STRING));
   try {
 	$newPassword = bin2hex(random_bytes(32));
   } catch (Exception $e) {
