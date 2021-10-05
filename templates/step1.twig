@@ -87,7 +87,7 @@
                         <label for="country" class="form-label">Country</label>
                         <select class="form-select" id="country">
                             <option value="">Choose...</option>
-                            <option value="usa">United States</option>
+                            <option value="usa" selected>United States</option>
                             <option value="can">Canada</option>
                         </select>
                         <div class="invalid-feedback">
@@ -97,13 +97,13 @@
 
                     <div class="col-md-4">
                         <label for="state" class="form-label">State</label>
-                        <select disabled class="form-select" id="state">
+                        <select class="form-select" id="state">
                             <option class="">Choose...</option>
                             <option class="usa">Alabama</option>
                             <option class="usa">Alaska</option>
                             <option class="usa">Arizona</option>
                             <option class="usa">Arkansas</option>
-                            <option class="usa">California</option>
+                            <option class="usa" selected>California</option>
                             <option class="usa">Colorado</option>
                             <option class="usa">Connecticut</option>
                             <option class="usa">Delaware</option>
@@ -170,7 +170,7 @@
 
                     <div class="col-md-3">
                         <label for="zip" class="form-label">Zip</label>
-                        <input type="text" class="form-control" id="zip" placeholder="">
+                        <input type="text" class="form-control" id="zip" placeholder="" value="90210">
                         <div class="invalid-feedback">
                             Zip code required.
                         </div>
