@@ -25,6 +25,7 @@
             "@putenv ADMIN_URL=https://admin.myintranet.app:5443",
             "@putenv ACCOUNT_KEY=5f66c0b15206d1.36412804",
             "@putenv BRAND_ACCENT_COLOR=FF0000",
+            "@putenv BRAND_LOGO=https://aboutus123.com:4443/demo/img/lendo.png",
             "@putenv SELF_SIGNED_CERT=1",
             "php -d max_execution_time=600 -d variables_order=EGPCS -S 127.0.0.1:8080 -t web"
         ]

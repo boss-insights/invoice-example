@@ -15,6 +15,7 @@ $commonData = array(
 	'ADMIN_URL'          => getenv('ADMIN_URL'),
 	'ACCOUNT_KEY'        => getenv('ACCOUNT_KEY'),
 	'BRAND_ACCENT_COLOR' => str_replace('#', '', (getenv('BRAND_ACCENT_COLOR') === false) ? '3199DB' : getenv('BRAND_ACCENT_COLOR')),
+	'BRAND_LOGO'		 => empty(getenv('BRAND_LOGO')) ? '/img/boss256.png' : getenv('BRAND_LOGO'),
 	'ENVIRONMENT'        => (getenv('ENVIRONMENT') === false) ? 'production' : getenv('ENVIRONMENT')
 );
 

@@ -40,6 +40,11 @@
             "description": "",
             "value": "",
             "required": false
+        },
+        "BRAND_LOGO": {
+            "description": "",
+            "value": "",
+            "required": false
         }
     }
 }
