@@ -100,3 +100,10 @@ Step 3 will perform an API call using our newly granted access to the `invoices`
 ---
 
 The code and above steps should give you an introduction in to how to use the Boss Insights API, For support with this example app or the API in general please use our help center at [bossinsights.com/support](https://bossinsights.com/support)
+
+## Debugging
+Two pages are made available to help troubleshoot problems:
+ * [http://127.0.0.1:8080/debug.php](http://127.0.0.1:8080/debug.php) - will show all current configuration environment variables
+ * [http://127.0.0.1:8080/info.php](http://127.0.0.1:8080/info.php) - will show details of the PHP webserver environment
+
+You may be asked to provide a copy of the output of these pages if logging a support ticket regarding this sample app.

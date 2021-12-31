@@ -26,18 +26,33 @@ $client = new Client(['verify' => !$selfSigned, 'base_uri' => 'https://' . $_SES
 $page = 1;
 $invoices = [];
 do {
-  $response = $client->request('GET', '/api/invoices?page=' . $page, [
-	'auth' => ['admin', $_SESSION['password']],
-	'headers' => [
-	  'User-Agent' => 'BossInsightsApiClient/1.0',
-	  'Accept' => 'application/json'
-	]
-  ]);
+  try {
+	$response = $client->request('GET', '/api/invoices?page=' . $page, [
+	  'auth' => ['admin', $_SESSION['password']],
+	  'headers' => [
+		'User-Agent' => 'BossInsightsApiClient/1.0',
+		'Accept' => 'application/json'
+	  ]
+	]);
+  } catch (Exception $e) {
+	echo $twig->render('error.twig', array_merge($commonData, [
+	  'errorType' => 'Error',
+	  'errorName' => 'failed to communicate with the data api',
+	  'errorDescription' => 'Exception: ' . $e->getMessage()
+	]));
+	throw new Exception($e->getMessage(), $e->getCode(), $e);
+  }
+
 
   if ($response->getStatusCode() === 200) {
 	$result = json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
 	if ($result === null) {
-	  throw new Exception('invalid api response');
+	  echo $twig->render('error.twig', array_merge($commonData, [
+		'errorType' => 'Error',
+		'errorName' => 'invalid data api response',
+		'errorDescription' => 'Response: ' . var_export($response->getBody()->getContents())
+	  ]));
+	  throw new Exception('invalid data api response');
 	}
 	$resultCount = count($result);
 	foreach ($result as $invoice) {
@@ -46,7 +61,12 @@ do {
 	  }
 	}
   } else {
-	throw new Exception('unable to communicate with api');
+	echo $twig->render('error.twig', array_merge($commonData, [
+	  'errorType' => 'Error',
+	  'errorName' => 'unable to communicate with data api',
+	  'errorDescription' => 'received status code ' . $response->getStatusCode() . ' when communicating with data api'
+	]));
+	throw new Exception('unable to communicate with data api');
   }
   $page++;
 } while ($resultCount > 0);

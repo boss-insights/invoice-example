@@ -1,0 +1,33 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="{{ BRAND_LOGO }}" alt="" height="64">
+        <h2>{{ errorType }}</h2>
+        <p class="lead">{{ errorName }}</p>
+    </div>
+    <hr>
+
+    <div class="d-flex justify-content-center row g-5 text-center">
+        <p class="fs-4 fw-normal text-center my-1">{{ errorDescription }}</p>
+
+    </div>
+
+    <hr><hr>
+
+    <div class="d-flex justify-content-center row g-5 text-center">
+        <h2>Environment Configuration Variables</h2>
+        <p class="fs-4 fw-normal text-center my-1">ORG_NAME: {{ dump(ORG_NAME) }}</p>
+        <p class="fs-4 fw-normal text-center my-1">ORG_URL: {{ dump(ORG_URL) }}</p>
+        <p class="fs-4 fw-normal text-center my-1">API_KEY: {{ dump(API_KEY) }}</p>
+        <p class="fs-4 fw-normal text-center my-1">API_SECRET: {{ dump(API_SECRET) }}</p>
+        <p class="fs-4 fw-normal text-center my-1">SITE_URL: {{ dump(SITE_URL) }}</p>
+        <p class="fs-4 fw-normal text-center my-1">ADMIN_URL: {{ dump(ADMIN_URL) }}</p>
+        <p class="fs-4 fw-normal text-center my-1">ACCOUNT_KEY: {{ dump(ACCOUNT_KEY) }}</p>
+        <p class="fs-4 fw-normal text-center my-1">BRAND_ACCENT_COLOR: {{ dump(BRAND_ACCENT_COLOR) }}</p>
+        <p class="fs-4 fw-normal text-center my-1">BRAND_LOGO: {{ dump(BRAND_LOGO) }}</p>
+        <p class="fs-4 fw-normal text-center my-1">ENVIRONMENT: {{ dump(ENVIRONMENT) }}</p>
+    </div>
+
+{% endblock %}
