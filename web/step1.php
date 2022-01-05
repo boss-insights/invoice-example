@@ -5,6 +5,7 @@
  */
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Twig\Environment;
 
 require __DIR__ . '/../common.php';
@@ -19,19 +20,28 @@ if ($_POST) {
   this would not be used in production but is added as a convenience to accommodate Heroku domain names
   */
   if (getenv('DYNO') !== false && !file_exists('allow_url.tmp')) {
-	$response = $client->request('POST', $commonData['ADMIN_URL'] . '/app/api.php', [
-	  'auth' => [$commonData['API_KEY'], $commonData['API_SECRET']],
-	  'headers' => [
-		'User-Agent' => 'BossInsightsApiClient/1.0',
-		'Accept' => 'application/json',
-		'Account-Key' => $commonData['ACCOUNT_KEY']
-	  ],
-	  'body' => json_encode([
-		'action' => 'allow_url',
-		'url' => $commonData['SITE_URL'],
-		'environment' => $commonData['ENVIRONMENT']
-	  ], JSON_THROW_ON_ERROR)
-	]);
+	try {
+	  $response = $client->request('POST', $commonData['ADMIN_URL'] . '/app/api.php', [
+		'auth' => [$commonData['API_KEY'], $commonData['API_SECRET']],
+		'headers' => [
+		  'User-Agent' => 'BossInsightsApiClient/1.0',
+		  'Accept' => 'application/json',
+		  'Account-Key' => $commonData['ACCOUNT_KEY']
+		],
+		'body' => json_encode([
+		  'action' => 'allow_url',
+		  'url' => $commonData['SITE_URL'],
+		  'environment' => $commonData['ENVIRONMENT']
+		], JSON_THROW_ON_ERROR)
+	  ]);
+	} catch (GuzzleException $e) {
+	  echo $twig->render('error.twig', array_merge($commonData, [
+		'errorType' => 'Error',
+		'errorName' => 'failed to add Dyno domain to allow list',
+		'errorDescription' => 'error when communicating with admin api: ' . $e->getMessage()
+	  ]));
+	  throw new Exception('failed to add Dyno domain to allow list');
+	}
 
 	if ($response->getStatusCode() !== 200) {
 	  echo $twig->render('error.twig', array_merge($commonData, [
