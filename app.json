@@ -7,42 +7,42 @@
     "website": "https://bossinsights.com/",
     "env": {
         "ORG_NAME": {
-            "description": "",
+            "description": "The name of your company that should be shown to users. EXAMPLE: Example Capital Corp",
             "value": "",
             "required": true
         },
         "ORG_URL": {
-            "description": "",
+            "description": "Your Boss Insights account url. EXAMPLE: https://example.myintranetapps.com",
             "value": "",
             "required": true
         },
         "API_KEY": {
-            "description": "",
+            "description": "API Key used to identify API requests for your account. EXAMPLE: APIPROJECT3",
             "value": "",
             "required": true
         },
         "API_SECRET": {
-            "description": "",
+            "description": "API Secret used to authenticate requests for your account",
             "value": "",
             "required": true
         },
         "ADMIN_URL": {
-            "description": "",
+            "description": "The URL to your admin app. This is region dependant and will vary depending on your data residency. EXAMPLE: https://admin.myintranetapps.com",
             "value": "",
             "required": true
         },
         "ACCOUNT_KEY": {
-            "description": "",
+            "description": "Your Boss Insights account unique identifier. EXAMPLE: 5ff363e48e2a82.98390839",
             "value": "",
             "required": true
         },
         "BRAND_ACCENT_COLOR": {
-            "description": "",
+            "description": "A HTML hexadecimal color code that will be used in the example app as a bold color for buttons and other accents. EXAMPLE: CA76F6",
             "value": "",
             "required": false
         },
         "BRAND_LOGO": {
-            "description": "",
+            "description": "The URL to your company logo, will be displayed at the top of each page. EXAMPLE: https://example.com/images/logo.png",
             "value": "",
             "required": false
         }

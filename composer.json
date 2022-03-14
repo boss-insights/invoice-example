@@ -19,13 +19,13 @@
     "scripts": {
         "start": [
             "@putenv ORG_NAME=Test Bank",
-            "@putenv ORG_URL=https://bank.myintranet.app:4443",
+            "@putenv ORG_URL=https://bank.myintranet.app",
             "@putenv API_KEY=admin",
             "@putenv API_SECRET=secret",
             "@putenv ADMIN_URL=https://admin.myintranet.app:5443",
             "@putenv ACCOUNT_KEY=5f66c0b15206d1.36412804",
             "@putenv BRAND_ACCENT_COLOR=FF0000",
-            "@putenv BRAND_LOGO=https://myintranet.app:4443/img/demo/lendcorp.png",
+            "@putenv BRAND_LOGO=https://myintranet.app/img/demo/lendcorp.png",
             "@putenv SELF_SIGNED_CERT=1",
             "php -d max_execution_time=600 -d variables_order=EGPCS -S 127.0.0.1:8080 -t web"
         ]
