@@ -81,7 +81,7 @@
 
                 <hr class="my-4">
                 <input type="hidden" id="nextStep" name="nextStep" value="1">
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Claim your funding</button>
+                <button id="claimFunding" disabled class="w-100 btn btn-primary btn-lg" type="submit">Claim your funding</button>
             </form>
         </div>
     </div>
@@ -155,6 +155,14 @@
                 $('#fundableInvoicesAmount').text('$' + thousandsAndDecimals(Math.abs(totals.fundableInvoicesAmount)));
                 $('#availableTotalAmount strong').text('$' + thousandsAndDecimals(totals.availableTotalAmount));
                 $('#invoiceCounter').text(totals.counter);
+            });
+
+            $('.selectInvoice input').on('change', function () {
+                if ($('.selectInvoice input:checked').length !== 0) {
+                    $('#claimFunding').prop('disabled', false);
+                } else {
+                    $('#claimFunding').prop('disabled', true);
+                }
             });
 
             $('ul#invoiceList li').on('click', function (e) {
