@@ -1,2 +1,4 @@
 /vendor/
 /web/allow_url.tmp
+.idea
+composer.phar

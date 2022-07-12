@@ -8,7 +8,7 @@ from the accounting software in order to show upcoming invoices for financing.
 
 It does not perform any actions other than gathering invoice data from a connected customers accounting software.
 
-> ⚠️ **Disclaimer**: This is an example application and not intended for production use as-is, it lacks code in areas such as logging and security and is provided as a bare-bones example of how to connect and fetch data from the Boss insights API
+> ⚠️ **Disclaimer**: This is an example application and not intended for production use as-is, it lacks code in areas such as logging and security and is provided as a bare-bones example of how to connect and fetch data from the Boss Insights API
 
 ## Steps this application performs
 
