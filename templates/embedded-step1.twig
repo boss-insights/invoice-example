@@ -1,0 +1,52 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="{{ BRAND_LOGO }}" alt="" height="64">
+        <h2>Embedded Example - Step 1</h2>
+        <p class="lead">Using Selected Account To Show Insights Dashboard</p>
+        <p id="data-key"></p>
+
+    </div>
+
+    <div id="link_page_element"></div>
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{{ ORG_URL }}/dock/link/2022-09-08/link.js" type="text/javascript"></script>
+    <script>
+        var widget = new DockLink({
+            container: document.getElementById('link_page_element'),
+            domain: "{{ ACCOUNT_URL }}",
+            token: "{{ EMBED_TOKEN }}", // token to access your own account
+            app: "dashboard/portfolio",
+            options: {
+                accountKey: '{{ ACCOUNT_KEY }}', // key of customer acc
+            }
+        });
+
+        widget.render();
+
+
+        window.addEventListener("message", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                // console.log("Hello from " + event.data.accountKey);
+                const accountKey = event.data.accountKey
+                $.ajax({
+                    type: "POST",
+                    url: "embedded-step1.php",
+                    data: {accountKey: accountKey},
+                    success: function (data) {
+                    }
+                });
+            window.location.replace("embedded-step2.php");
+            });
+
+
+    </script>
+{% endblock %}

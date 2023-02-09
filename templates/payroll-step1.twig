@@ -1,0 +1,235 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="{{ BRAND_LOGO }}" alt="" height="64">
+        <h2>Payroll Example - Step 1</h2>
+        <p class="lead">Using payroll Report To Show Data By Employee</p>
+    </div>
+    <hr>
+
+    <div class="row g-5">
+        <div class="col-md-5 col-lg-4 order-md-last">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-primary">Selected Invoices</span>
+                <span class="badge bg-primary rounded-pill">0</span>
+            </h4>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Selected Invoices</h6>
+                        <small class="text-muted">Available for factoring</small>
+                    </div>
+                    <span class="text-muted">$0</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">80% Fundable</h6>
+                        <small class="text-muted">Revolving Credit</small>
+                    </div>
+                    <span class="text-muted">$0</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                    <div class="text-success">
+                        <h6 class="my-0">Promo code</h6>
+                        <small>CASHNOW</small>
+                    </div>
+                    <span class="text-success">+$25</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Available TODAY (USD)</span>
+                    <strong>$25</strong>
+                </li>
+            </ul>
+
+
+        </div>
+        <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">Customer</h4>
+            <form id="createAccount" class="needs-validation" action="payroll-step1.php" method="post" accept-charset="UTF-8"
+                  enctype="application/x-www-form-urlencoded">
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <label for="legalName" class="form-label">Legal name</label>
+                        <input type="text" class="form-control" id="legalName" name="legalName" placeholder="" value=""
+                               required>
+                        <div class="invalid-feedback">
+                            Valid legal name is required.
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="you@example.com" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" name="email"
+                               required>
+                        <div class="invalid-feedback">
+                            Please enter a valid email address to access the secure portal
+                        </div>
+                    </div>
+
+
+                    <div class="col-12">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="address" placeholder="1234 Main St">
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="address2" class="form-label">Address 2 <span
+                                    class="text-muted">(Optional)</span></label>
+                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                    </div>
+
+                    <div class="col-md-5">
+                        <label for="country" class="form-label">Country</label>
+                        <select class="form-select" id="country">
+                            <option value="">Choose...</option>
+                            <option value="usa" selected>United States</option>
+                            <option value="can">Canada</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid country.
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="state" class="form-label">State</label>
+                        <select class="form-select" id="state">
+                            <option class="">Choose...</option>
+                            <option class="usa">Alabama</option>
+                            <option class="usa">Alaska</option>
+                            <option class="usa">Arizona</option>
+                            <option class="usa">Arkansas</option>
+                            <option class="usa" selected>California</option>
+                            <option class="usa">Colorado</option>
+                            <option class="usa">Connecticut</option>
+                            <option class="usa">Delaware</option>
+                            <option class="usa">District Of Columbia</option>
+                            <option class="usa">Florida</option>
+                            <option class="usa">Georgia</option>
+                            <option class="usa">Hawaii</option>
+                            <option class="usa">Idaho</option>
+                            <option class="usa">Illinois</option>
+                            <option class="usa">Indiana</option>
+                            <option class="usa">Iowa</option>
+                            <option class="usa">Kansas</option>
+                            <option class="usa">Kentucky</option>
+                            <option class="usa">Louisiana</option>
+                            <option class="usa">Maine</option>
+                            <option class="usa">Maryland</option>
+                            <option class="usa">Massachusetts</option>
+                            <option class="usa">Michigan</option>
+                            <option class="usa">Minnesota</option>
+                            <option class="usa">Mississippi</option>
+                            <option class="usa">Missouri</option>
+                            <option class="usa">Montana</option>
+                            <option class="usa">Nebraska</option>
+                            <option class="usa">Nevada</option>
+                            <option class="usa">New Hampshire</option>
+                            <option class="usa">New Jersey</option>
+                            <option class="usa">New Mexico</option>
+                            <option class="usa">New York</option>
+                            <option class="usa">North Carolina</option>
+                            <option class="usa">North Dakota</option>
+                            <option class="usa">Ohio</option>
+                            <option class="usa">Oklahoma</option>
+                            <option class="usa">Oregon</option>
+                            <option class="usa">Pennsylvania</option>
+                            <option class="usa">Rhode Island</option>
+                            <option class="usa">South Carolina</option>
+                            <option class="usa">South Dakota</option>
+                            <option class="usa">Tennessee</option>
+                            <option class="usa">Texas</option>
+                            <option class="usa">Utah</option>
+                            <option class="usa">Vermont</option>
+                            <option class="usa">Virginia</option>
+                            <option class="usa">Washington</option>
+                            <option class="usa">West Virginia</option>
+                            <option class="usa">Wisconsin</option>
+                            <option class="usa">Wyoming</option>
+
+                            <option class="can">Alberta</option>
+                            <option class="can">British Columbia</option>
+                            <option class="can">Manitoba</option>
+                            <option class="can">New Brunswick</option>
+                            <option class="can">Newfoundland and labrador</option>
+                            <option class="can">Nova Scotia</option>
+                            <option class="can">Ontario</option>
+                            <option class="can">Prince Edward Island</option>
+                            <option class="can">Quebec</option>
+                            <option class="can">Saskatchewan</option>
+
+                        </select>
+                        <div class="invalid-feedback">
+                            Please provide a valid state.
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="zip" class="form-label">Zip</label>
+                        <input type="text" class="form-control" id="zip" placeholder="" value="90210">
+                        <div class="invalid-feedback">
+                            Zip code required.
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info" checked>
+                    <label class="form-check-label" for="save-info">Yes, i'm open to other financial product offers</label>
+                </div>
+
+
+                <hr class="my-4">
+
+                <button id="submitForm" class="w-100 btn btn-primary btn-lg" type="submit">
+                    <span class="defaultText">Create Account and Continue...</span>
+                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    <span class="submissionText d-none">Creating Account...</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            // Disable button and show spinner
+            $('#createAccount').on('submit', function () {
+                $('#submitForm').prop('disabled', true);
+                $('.submissionText, .d-none').removeClass('d-none');
+                $('.defaultText').addClass('d-none');
+            });
+            //Filter state dropdown by country
+            $('#country').on('change', function () {
+                // Clear dropdown;
+                $('#state option:selected').prop('selected', false);
+                // Select country
+                var country = $(this).find('option:selected').val();
+                var stateOrProvince = country === 'can' ? 'Province' : 'State   ';
+                // Set label for state/province dropdown
+                $('label[for="state"]').text(stateOrProvince);
+                // If no country is selected, set state dropdown do disabled - else, hide other country's states/provinces
+                if(country === "") {
+                    $('#state').prop('disabled', true);
+                } else {
+                    $('#state').prop('disabled', false);
+                    $('#state option').each(function() {
+                        if($(this).attr('class') !== country) {
+                            $(this).hide();
+                        } else {
+                            $(this).show();
+                        }
+                    });
+                }
+            });
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends "base.twig"%}
+{% block head %}
+<style>
+    .payrollTable thead th { position: sticky; top: 0; z-index: 1; background-color: white;}
+    table  { border-collapse: collapse; width: 100%; }
+</style>
+{% endblock %}
+{% block content %}
+
+    <div class="text-center">
+        <img class="d-block mx-auto mb-4" src="{{ BRAND_LOGO }}" alt="" height="64">
+        <h2>Payroll Example - Step 3</h2>
+        <p class="lead">Using payroll Report To Show Data By Employee</p>
+        <a href="/index.php"><button id="homeButton" type="button" disabled="true" class="btn btn-primary">Home</button></a>
+    </div>
+    <hr>
+
+
+            <h4 class="mb-3">Payroll from your records:</h4>
+             <div class="payrollTable" style="overflow-x:auto; overflow-y:auto; max-height: 500px">
+                <table class="table table-striped table-bordered table-responsive">
+                    <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Platform</th>
+                        <th scope="col">Company</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">Employee Number</th>
+                        <th scope="col">Employee Name</th>
+                        <th scope="col">Employee id</th>
+                        <th scope="col">Pay Frequency</th>
+                        <th scope="col">Hourly Rate</th>
+                        <th scope="col">Salary</th>
+                        <th scope="col">Standard Hours</th>
+                        <th scope="col">Check Date</th>
+                        <th scope="col">Check Number</th>
+                        <th scope="col">Coverage Start</th>
+                        <th scope="col">Coverage End</th>
+                        <th scope="col">Gross Wages</th>
+                        <th scope="col">Social Security</th>
+                        <th scope="col">Medicare Tax</th>
+                        <th scope="col">Fica Tax</th>
+                        <th scope="col">Federal Tax</th>
+                        <th scope="col">State Tax</th>
+                        <th scope="col">Other Tax</th>
+                        <th scope="col">Local Tax</th>
+                        <th scope="col">Dental Deductions</th>
+                        <th scope="col">Health Deductions</th>
+                        <th scope="col">HSA Deductions</th>
+                        <th scope="col">Pre Tax Deductions</th>
+                        <th scope="col">After Tax Deductions</th>
+                        <th scope="col">Voluntary Deductions</th>
+                        <th scope="col">Garnishment Deductions</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Regular Hours</th>
+                        <th scope="col">Overtime Hours</th>
+                        <th scope="col">Holiday Hours
+                        <th scope="col">Sick Hours</th>
+                        <th scope="col">Regular wages</th>
+                        <th scope="col">Overtime wages</th>
+                        <th scope="col">Holiday wages</th>
+                        <th scope="col">Sick wages</th>
+                        <th scope="col">Reimbursements</th>
+                        <th scope="col">Commission</th>
+                        <th scope="col">Bonus</th>
+                        <th scope="col">Other Pay</th>
+                        <th scope="col">Net Pay</th>
+                        <th scope="col">Company Futa Tax</th>
+                        <th scope="col">Company Suta Tax</th>
+                        <th scope="col">Company Social Security</th>
+                        <th scope="col">Company Medicare Tax</th>
+                        <th scope="col">Company State Tax</th>
+                        <th scope="col">Company Other Tax</th>
+                        <th scope="col">Company Other Contributions</th>
+
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                    {% for payroll in payrollData %}
+                    <tr>
+
+                            {% for payroll in payroll %}
+                                <td>{{ payroll }}</td>
+                            {% endfor %}
+
+{#                        <th scope="row">{{ payroll.employee_number }}</th>#}
+{#                        <td>{{ payroll.employee_name }}</td>#}
+{#                        <td>{{ payroll.dba }}</td>#}
+{#                        <td>{{ payroll.start }}</td>#}
+{#                        <td>{{ payroll.end }}</td>#}
+{#                        <td>{{ payroll.pay_frequency }}</td>#}
+{#                        <td>{{ payroll.hourly_rate }}</td>#}
+{#                        <td>{{ payroll.salary }}</td>#}
+{#                        <td>{{ payroll.standard_hours }}</td>#}
+{#                        <td>{{ payroll.check_date }}</td>#}
+{#                        <td>{{ payroll.check_number }}</td>#}
+{#                        <td>{{ payroll.coverage_start }}</td>#}
+{#                        <td>{{ payroll.coverage_end }}</td>#}
+{#                        <td>{{ payroll.gross_wages }}</td>#}
+{#                        <td>{{ payroll.social_security }}</td>#}
+{#                        <td>{{ payroll.medicare_tax }}</td>#}
+{#                        <td>{{ payroll.fica_tax }}</td>#}
+{#                        <td>{{ payroll.federal_tax }}</td>#}
+{#                        <td>{{ payroll.other_tax }}</td>#}
+{#                        <td>{{ payroll.local_tax }}</td>#}
+{#                        <td>{{ payroll.dental_deductions }}</td>#}
+{#                        <td>{{ payroll.health_deductions }}</td>#}
+{#                        <td>{{ payroll.hsa_deductions }}</td>#}
+{#                        <td>{{ payroll.pre_tax_deductions }}</td>#}
+{#                        <td>{{ payroll.voluntary_deductions }}</td>#}
+{#                        <td>{{ payroll.garnishment_deductions }}</td>#}
+{#                        <td>{{ payroll.description_regular_hours }}</td>#}
+{#                        <td>{{ payroll.overtime_hours }}</td>#}
+{#                        <td>{{ payroll.regular_wages }}</td>#}
+{#                        <td>{{ payroll.overtime_wages }}</td>#}
+{#                        <td>{{ payroll.reimbursements }}</td>#}
+{#                        <td>{{ payroll.commission }}</td>#}
+{#                        <td>{{ payroll.bonus }}</td>#}
+{#                        <td>{{ payroll.net_pay }}</td>#}
+{#                        <td>{{ payroll.company_futa_tax }}</td>#}
+{#                        <td>{{ payroll.company_social_security }}</td>#}
+{#                        <td>{{ payroll.company_medicare_tax }}</td>#}
+{#                        <td>{{ payroll.company_state_tax }}</td>#}
+{#                        <td>{{ payroll.company_other_tax }}</td>#}
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+             </div>
+{#        </div>#}
+
+{% endblock %}
+{% block script %}
+    <script>
+        window.addEventListener('load', function () {
+            $("#homeButton").prop("disabled", false);
+        })
+
+    </script>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="{{ BRAND_LOGO }}" alt="" height="64">
+        <h2>Payroll Example - Step 2</h2>
+        <p class="lead">Using payroll Report To Show Employee Payroll Data</p>
+    </div>
+
+    <div class="DockLink_AppList"></div>
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{{ ORG_URL }}/dock/link/2022-09-08/link.js" type="text/javascript"></script>
+    <script>
+        var widget = new DockLink({
+            container: document.getElementsByClassName('DockLink_AppList')[0],
+            name: "{{ ORG_NAME }}",
+            brand: {accent:'#{{ BRAND_ACCENT_COLOR }}'},
+            domain: "{{ ACCOUNT_DOMAIN }}",
+            cancel: "{{ SITE_URL }}/payroll-step1.php",
+            redirect: "{{ SITE_URL }}/payroll-step3.php",
+            platforms: ['payroll'],
+            auth: {basic: '{{ AUTH_BASIC }}'},
+            height: "300px",
+            overflow: "auto"
+
+        });
+
+        widget.render();
+    </script>
+{% endblock %}
