@@ -24,7 +24,7 @@
         "API_SECRET": {
             "description": "API Secret used to authenticate requests for your account",
             "value": "",
-            "required": true
+            "required": false
         },
         "ADMIN_URL": {
             "description": "The URL to your admin app. This is region dependant and will vary depending on your data residency. EXAMPLE: https://admin.myintranetapps.com",
