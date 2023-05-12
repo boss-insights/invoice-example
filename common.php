@@ -28,7 +28,7 @@ $twig->addExtension(new DebugExtension());
 session_start();
 
 foreach ($commonData as $commonKey => $commonValue) {
-  if (empty($commonValue)) {
+  if (empty($commonValue) && $commonKey !== 'API_SECRET') {
 	echo $twig->render('error.twig', array_merge($commonData, ['errorType' => 'Error', 'errorName' => 'empty variable', 'errorDescription' => 'environment variable ' . $commonKey . ' cannot be empty']));
 	throw new Exception('environment variable ' . $commonKey . ' cannot be empty');
   }
