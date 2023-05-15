@@ -19,11 +19,11 @@
     "scripts": {
         "start": [
             "@putenv ORG_NAME=Test Bank",
-            "@putenv ORG_URL=https://testlender.bossintegration.com",
+            "@putenv ORG_URL=https://bank.myintranet.app",
             "@putenv API_KEY=admin",
-            "@putenv API_SECRET=Secret0!",
-            "@putenv ADMIN_URL=https://admin.bossintegration.com",
-            "@putenv ACCOUNT_KEY=6151eb80810042.69461511",
+            "@putenv API_SECRET=secret",
+            "@putenv ADMIN_URL=https://admin.myintranet.app:5443",
+            "@putenv ACCOUNT_KEY=5f66c0b15206d1.36412804",
             "@putenv BRAND_ACCENT_COLOR=FF0000",
             "@putenv BRAND_LOGO=https://myintranet.app/img/demo/lendcorp.png",
             "@putenv SELF_SIGNED_CERT=1",
