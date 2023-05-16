@@ -58,7 +58,7 @@ After deploying the application can click the `view` button within Heroku to ope
 
 For testing and development purposes you can run the application from your local development machine. You will need the following installed:
 
-* PHP 8.0 or higher - [https://www.php.net/downloads.php](https://www.php.net/downloads.php)
+* PHP 8.2 or higher - [https://www.php.net/downloads.php](https://www.php.net/downloads.php)
 * Composer 2.2 or higher - [https://getcomposer.org/download/](https://getcomposer.org/download/)
 
 It is assumed these will be added to your system [PATH](https://en.wikipedia.org/wiki/PATH_(variable)), if not you'll need to adjust the commands below to reference their full file system paths
