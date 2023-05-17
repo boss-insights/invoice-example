@@ -45,7 +45,7 @@ option, enter an API key and secret and click the `Deploy to Heroku` button. Usi
 of the required parameters to launch the application.
 
 If you have manually checked out the code on GitHub and deploy to heroku manually you will need to enter Heroku config
-vars or the application will not run without error.
+vars (which are configured in app.json) or the application will not run without error.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/boss-insights/invoice-example)
 

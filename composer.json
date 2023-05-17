@@ -18,6 +18,7 @@
     },
     "scripts": {
         "start": [
+            "Composer\\Config::disableProcessTimeout",
             "@putenv ORG_NAME=Test Bank",
             "@putenv ORG_URL=https://bank.myintranet.app",
             "@putenv API_KEY=admin",
