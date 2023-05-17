@@ -3,7 +3,7 @@
     "description": "Using accounting app data to show a list of invoices for factoring",
     "repository": "https://github.com/boss-insights/invoice-example",
     "logo": "https://static.bossinsights.com/images/bosslogo-blue-cuponly-whitespace-highrez.png",
-    "keywords": ["api", "accounting", "example"],
+    "keywords": ["api", "accounting", "example", "quickstart"],
     "website": "https://bossinsights.com/",
     "env": {
         "ORG_NAME": {
