@@ -1,5 +1,5 @@
 # Invoice Example
-
+![Example application screenshot showing invoices in step 3](assets/example-step3.png "Step 1")
 ## What this app does
 
 This is an example to demonstrate how to embed the Boss Insights javascript widget within a custom financial
