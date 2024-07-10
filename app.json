@@ -17,7 +17,7 @@
             "required": true
         },
         "API_KEY": {
-            "description": "API Key used to identify API requests for your account. EXAMPLE: APIPROJECT3",
+            "description": "API Key used to authenticate API requests for your account. EXAMPLE: sk_BVenbypnLXD7Zpi.yRroFZmNgymKf3uvexGMSvV6V",
             "value": "",
             "required": true
         },
@@ -45,6 +45,11 @@
             "description": "The URL to your company logo, will be displayed at the top of each page. EXAMPLE: https://example.com/images/logo.png",
             "value": "",
             "required": false
+        },
+        "ALLOW_URL": {
+            "description": "When set to 1 the example app will automatically add the heroku domain to a CORS allow list to support embedding. Set to 0 to disable this.",
+            "value": "1",
+            "required": true
         }
     }
 }

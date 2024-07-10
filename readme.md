@@ -40,14 +40,14 @@ or use Heroku you will need to provide environment configuration variables which
 
 ### Heroku
 
-Preferred method: From within your Boss Insights administration console you can select the `Developers > Embed` menu
-option, enter an API key and secret and click the `Deploy to Heroku` button. Using this option to deploy will prefill many
+Preferred method: From within your Boss Insights administration console you can select the `API > Embed` menu
+option, enter an API key and click the `Deploy to Heroku` button. Using this option to deploy will prefill many
 of the required parameters to launch the application.
 
 If you have manually checked out the code on GitHub and deploy to heroku manually you will need to enter Heroku config
 vars (which are configured in app.json) or the application will not run without error.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/boss-insights/invoice-example)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy?template=https://github.com/boss-insights/invoice-example)
 
 #### Viewing the application
 After deploying the application can click the `view` button within Heroku to open your newly deployed app, it will be accessible at a dynamically generated domain like https://mysterious-ravine-99578.herokuapp.com/ or similar.

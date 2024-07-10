@@ -1,14 +1,9 @@
 <?php
 /**
  * @global array $commonData
- * @global Environment $twig
+ * @global Twig\Environment $twig
  */
-
-use Twig\Environment;
-
 require __DIR__ . '/../common.php';
-
-
 
 $accountUrl = $_SESSION['accountURL'];
 $embedToken = $_SESSION['embedToken'];

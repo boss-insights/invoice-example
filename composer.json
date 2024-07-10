@@ -1,11 +1,17 @@
 {
     "name":"bossinsights/invoice-example",
     "description": "Using accounting app data to show a list of invoices for factoring",
+    "type": "project",
     "homepage": "https://bossinsights.com",
     "readme": "readme.md",
+    "version": "1.1.0",
     "license": "MIT",
+    "config": {
+        "sort-packages": true
+    },
     "require": {
         "php": "8.2.*",
+        "ext-curl": "*",
         "ext-json": "*",
         "ext-session": "*",
         "ext-openssl": "*",
@@ -28,6 +34,7 @@
             "@putenv BRAND_ACCENT_COLOR=FF0000",
             "@putenv BRAND_LOGO=https://myintranet.app/img/demo/lendcorp.png",
             "@putenv SELF_SIGNED_CERT=1",
+            "@putenv ALLOW_URL=0",
             "php -d max_execution_time=600 -d variables_order=EGPCS -S 127.0.0.1:8080 -t web"
         ]
     },

@@ -5,7 +5,6 @@
  */
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Twig\Environment;
 
 require __DIR__ . '/../common.php';
@@ -30,7 +29,7 @@ try {
     ]));
     throw new Exception($e->getMessage(), $e->getCode(), $e);
 }
-//var_dump(json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR));
+
 if ($response->getStatusCode() === 200) {
     $result = json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
     if ($result === null) {
@@ -59,7 +58,4 @@ if($_POST) {
     }
 }
 
-
-
 echo $twig->render('embedded-step1.twig', array_merge($commonData, ['EMBED_TOKEN' => $_SESSION['embedToken'], 'ACCOUNT_URL' => $_SESSION['accountURL']]));
-
