@@ -89,7 +89,7 @@ When you first access the application you should be presented with `Step 1` whic
 
 ![Example application screenshot showing step 1](assets/example-step1.png "Step 1")
 
-At this point only one API call has been performed which is to add the current domain name that the app is being accessed via to an allow-list permitting embedding of the javascript widget. This is provided as an example convenience and typically in a production app you would add this manually yourself via the `Developers > Embed > Allowed URLs` menu option within the administration application. 
+At this point only one API call has been performed which is to add the current domain name that the app is being accessed via to an allow-list permitting embedding of the javascript widget. This is provided as an example convenience and typically in a production app you would add this manually yourself via the `API > Embed > Allowed URLs` menu option within the administration application. 
 
 Clicking the `Create Account and Continue` button will use the API to provision a data storage account for a customer which will provide a unique customer account identifier that must be passed to the javascript widget on the subsequent step 2 so that it knows for which customer any connected data will be associated with.
 
